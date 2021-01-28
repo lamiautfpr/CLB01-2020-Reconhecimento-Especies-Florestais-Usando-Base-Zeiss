@@ -165,7 +165,7 @@ axios
 bootstrap-vue-cli
 ```
 
-# Com todo o projeto já configurado, execute os comandos abaixo no terminal para rodar o projeto.
+Com todo o projeto já configurado, execute os comandos abaixo no terminal para rodar o projeto.
 
 ```bash
 # Backend
