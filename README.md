@@ -3,8 +3,7 @@
   <a href="https://www.lamia.sh.utfpr.edu.br/">
     <img src="https://user-images.githubusercontent.com/26206052/86039037-3dfa0b80-ba18-11ea-9ab3-7e0696b505af.png" alt="LAMIA - Laboratório de                  Aprendizagem de Máquina e Imagens Aplicados à Indústria" width="400"></a>
 <br> <br>
-Protótipo de Reconhecimento de Espécies Florestais 
-<h4 align="center"><a href="https://bit.ly/paineldadoscovid19" target="_blank">Informe Epidemiológico Inteligente</a></h4>
+<h4 align="center"><a href="https://bit.ly/paineldadoscovid19" target="_blank">Protótipo de Reconhecimento de Espécies Florestais </a></h4>
 </h1>
 
 <p align="center">
@@ -157,6 +156,8 @@ $ rm -rf node_modules
 # Reinstall dependencies
 $ npm install
 ```
+
+Dependências do frontend
 
 ```bash
 vue-cli
