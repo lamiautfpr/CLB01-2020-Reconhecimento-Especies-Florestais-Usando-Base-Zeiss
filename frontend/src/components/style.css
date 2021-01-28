@@ -1,0 +1,132 @@
+.main {
+  display: flex;
+  width: 80%;
+  height: 400px;
+}
+
+.imagePreview{
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.styleMain{
+  margin: auto;
+  background-color: #949494;
+  padding: 2%;
+  border-radius: 20px;
+}
+
+h3{
+  margin: 1% auto 10%;
+  font-family: 'Bebas Neue';
+  font-size: 30px;
+}
+
+.imgContent {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  margin: 1% auto;
+  margin-bottom: 3%;
+}
+
+.attachFileSpan {
+  color: #2b6dad;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.attachFileSpan:hover {
+  text-decoration: underline;
+}
+
+.imgPreview {
+  flex: 1 1 auto;
+}
+
+#buttonSave{
+  width: 40%;
+  margin: auto;
+}
+
+#buttonSend {
+  width: 40%;
+  margin: auto;
+}
+
+#divUpload{
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+#ButtonClassfication{
+  width: 100%;
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+}
+
+#colorValue:hover{
+  transition: 1ms;
+  color: gray;
+}
+
+#colorValue{
+  color:blue;
+  float: right;
+}
+
+.imgResult {
+  visibility: hidden;
+  flex: 1 1 auto;
+  flex-wrap: row;
+  width: 25rem;
+  height: 10%;
+  margin: 10px auto 10px auto;
+}
+
+.card-detalhe{
+  width: 60%;
+}
+
+#divResultModel {
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+#spanColor, #nameClass{
+  flex: 1 1 auto;
+}
+
+.imgResultId{
+  width: 50%;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .main{
+    flex: 1 1 auto;
+    width: 50%;
+    height: 300px;
+    margin: 5% auto;
+  }
+
+  #ButtonClassfication{
+    flex-direction: row;
+    width: 80%;
+  }
+
+  #buttonSave, #buttonSend{
+    width: 20%;
+  }
+
+  .imgResult{
+    width: 40rem;
+  } 
+}
