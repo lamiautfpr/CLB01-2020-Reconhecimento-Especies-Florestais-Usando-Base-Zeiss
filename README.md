@@ -179,7 +179,7 @@ Obs: O projeto será hospedado localmente utilizando a porta 8080 para o fronten
 
 ## Tecnologias
 
-Painel Paraná Inteligente Covid-19 usa os seguintes algoritmos e tecnologias:
+O protótipo utiliza as seguintes bibliotecas e tecnologias:
 
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Executar a API para realizar a comunicação entre o Frontend e o Backend
 * [TensorFlow](https://www.tensorflow.org/?hl=pt-br) - Executa o modelo 
