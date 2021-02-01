@@ -8,8 +8,8 @@
         <b-sidebar id="sidebar-1" title="LAMIA" backdrop-variant="dark" backdrop shadow> <!--Barra lateral com os dados abaixo-->
           <div class="px-3 py-2">
             <p>
-              O <b>LAMIA</b> foi fundado no início do ano de <span>2019</span> pelo professor Dr. Thiago França Naves com um pequeno 
-              grupo de alunos do curso de Ciência da Computação. Em junho do mesmo ano a professora Dra. Arlete 
+              O <b>LAMIA</b> foi fundado no início do ano de <span>2019</span> pelo professor Dr. Thiago França Naves com um pequeno
+              grupo de alunos do curso de Ciência da Computação. Em junho do mesmo ano a professora Dra. Arlete
               Terezinha Beuren e o professor Me. Anderson Brilhador se juntaram formando o time de orientadores do laboratório.
             </p>
           </div>
@@ -17,8 +17,8 @@
           <!--Imagem do LAMIA que redireciona para o site-->
           <div class="imaSideBar">
             <a href="https://www.lamia.sh.utfpr.edu.br/"><b-img src="https://www.lamia.sh.utfpr.edu.br/static/media/logo.217404a3.jpg" fluid thumbnail></b-img></a>
-          </div>  
-          
+          </div>
+
           <!--Cada avatar referencia para uma das redes sociais do LAMIA -->
           <div class="Centro">
               <a href="https://www.instagram.com/lamiautfpr/"><b-avatar variant="info" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png"></b-avatar></a>
@@ -33,7 +33,7 @@
     </div>
 
     <!--Cabeçalho da página-->
-    <div id="app">  
+    <div id="app">
       <h2>Protótipo Final de reconhecimento de espécies florestais</h2>
       <router-view/>
     </div>
@@ -41,19 +41,18 @@
     <!--Desenvolvedores, cada avatar redireciona ao github de cada um-->
     <div id="footer">
         <div class="avatar">
-          <a target="__blank" href="https://github.com/LuisFernandoRosa"><b-avatar variant="info" src="https://avatars2.githubusercontent.com/u/55769006?s=400&u=45cdaa5e1d403095c02642d63a24f9fdf0b8a41f&v=4"></b-avatar>LuisFernandoRosa . GitHub</a> <!--Avatar do Luis-->
-          <a target="__blank" href="https://github.com/L3onT3chh"><b-avatar variant="info" src="https://app.lamia.sh.utfpr.edu.br/files/606f295c1daecb65ec6cd5ff24a190d5.jpeg"></b-avatar>L3onT3chh . GitHub</a> <!--Avatar do Gustavo-->
-          <a target="__blank" href="https://github.com/ANACAPELETTI"><b-avatar variant="info" src="https://app.lamia.sh.utfpr.edu.br/files/f61bf260cd4e849ac612785435f0bed0.jfif"></b-avatar>ANACAPELETTI . GitHub</a> <!--Avatar da Ana-->
+          <a target="__blank" href="https://github.com/LuisFernandoRosa"><b-avatar variant="info" src="https://avatars2.githubusercontent.com/u/55769006?s=400&u=45cdaa5e1d403095c02642d63a24f9fdf0b8a41f&v=4"></b-avatar><span class="avatar-item">LuisFernandoRosa . GitHub</span></a> <!--Avatar do Luis-->
+          <a target="__blank" href="https://github.com/L3onT3chh"><b-avatar variant="info" src="https://app.lamia.sh.utfpr.edu.br/files/606f295c1daecb65ec6cd5ff24a190d5.jpeg"></b-avatar><span class="avatar-item">L3onT3chh . GitHub</span></a> <!--Avatar do Gustavo-->
+          <a target="__blank" href="https://github.com/ANACAPELETTI"><b-avatar variant="info" src="https://app.lamia.sh.utfpr.edu.br/files/f61bf260cd4e849ac612785435f0bed0.jfif"></b-avatar><span class="avatar-item">ANACAPELETTI . GitHub</span></a> <!--Avatar da Ana-->
         </div>
     </div>
   </div>
 </template>
 
-
 <script>
-  import './style.css';
+import './style.css'
 
-  export default {
-    name: 'App'
-  }
+export default {
+  name: 'App'
+}
 </script>

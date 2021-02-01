@@ -1,260 +1,240 @@
 <template>
   <div>
     <div id="mainDiv">
-      <div class="styleMain main" id="main">
+      <div class="styleMain main">  <!-- Essa div é responsável por receber a imagem e exibi-lá -->
         <div class="imgContent" id="imgContent">
-          <!--"imagePreview", mostra a imagem após selecionada-->
-          <img
-            class="imagePreview"
-            :src="uploadedImage"
-            alt=" "
-            style="width: 40%; margin-top: 30px; border-radius: 20px"
-          />
-          <div id="divUpload">
-            <span
-              title="attach file"
-              class="attachFileSpan"
-              onclick="document.getElementById('image').click()"
-            >
-              <b-img
-                id="imageUpload"
-                v-bind="mainProps"
-                blank-color="rgba(128, 255, 255, 0.5)"
-                src="https://image.flaticon.com/icons/png/512/12/12313.png"
-                width="100"
-                alt="RGBa color image"
-              ></b-img>
-            </span>
-            <br />
 
-            <input
-              type="file"
-              id="image"
-              class="file_input"
-              name="photo"
-              @change="onFileChange"
-              accept="image/*"
-              multiple
-              required
-            />
+          <!--"imagePreview", mostra a imagem após selecionada-->
+
+          <div id="receive-image">
+            <img class="imagePreview" :src="uploadedImage" alt=""/>
+
+            <div id="divUpload">
+              <span title="Enviar imagem(s)" class="attachFileSpan"
+                onclick="document.getElementById('image').click()">
+
+                <b-img id="imageUpload" v-bind="mainProps" blank-color="rgba(128, 255, 255, 0.5)"
+                  src="https://image.flaticon.com/icons/png/512/12/12313.png" width="100" alt="RGBa color image">
+                  </b-img>
+              </span>
+              <br/>
+
+              <input type="file" id="image" class="file_input" name="photo"
+                @change="onFileChange" accept="image/*" multiple required/>
+            </div>
           </div>
 
           <div id="ButtonClassfication">
             <!--Botões do bootstrap-->
-            <button
-              type="button"
-              @click="onUploadImage"
-              id="buttonSend"
-              class="btn btn-dark"
-            >
+            <button type="button" @click="onUploadImage" id="buttonSend" class="btn btn-dark">
               Classification
             </button>
+
             <br />
-            <button
-              type="button"
-              @click="onUploadImage"
-              id="buttonSave"
-              class="btn btn-dark"
-            >
+            <button type="button" @click="onUploadImage" id="buttonSave" class="btn btn-dark">
               Save Image
             </button>
           </div>
         </div>
-      </div>
-
-      <div class="imgResult" id="imgResultId">
-        <b-card-group deck id="divResultModel" disabled="true">
-          <b-card
-            id="dropdown-offset"
-            offset="25"
-            text="Offset Dropdown"
-            class="m-2"
-          >
-            <button
-              type="button"
-              id="list1"
-              disabled="true"
-              class="list-group-item list-group-item-action butList"
-            ></button>
-            <button
-              type="button"
-              id="list2"
-              disabled="true"
-              class="list-group-item list-group-item-action butList"
-            ></button>
-            <button
-              type="button"
-              id="list3"
-              disabled="true"
-              class="list-group-item list-group-item-action butList"
-            ></button>
-          </b-card>
-        </b-card-group>
-
-        <div>
-          <b-button variant="dark" v-b-modal.modal-1
-            >Mais detalhes
-            <b-modal id="modal-1" title="Detalhes">
-              <b-card
-                id="dropdown-offset card-detalhe"
-                offset="25"
-                text="Offset Dropdown"
-                class="m-2"
-              >
-                <button
-                  type="button"
-                  v-for="item in Itens"
-                  disabled="true"
-                  class="list-group-item list-group-item-action butList"
-                >
-                  <div class="detalhes-1">
-                    <div id="nameClass">
-                      {{ loadNameClass(item.classe) }}
-                      <span id="colorValue"
-                        >{{ item.value
-                        }}<span style="color: black">%</span></span
-                      >
-                    </div>
-                  </div>
-                </button>
-              </b-card>
-            </b-modal>
-          </b-button>
+        <div id="margin">
+          <ul id="listImage">
+            <h4>Images carregadas</h4>
+            <li v-for="item in listImage" :key="item.id">{{item.id}}<img :src="item.data" width="100px"/><Modal :data="item" title2="Detalhes"/><b-button variant="danger" style="width: 40%; height: 37px; margin-top: 14px; margin-right: 80px;" @click="deleteImage(item)">Apagar</b-button></li>
+          </ul>
         </div>
       </div>
-    </div>
-
-    <div>
-      <img :src="item" v-for="item in listImage" width="50px" />
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios"; // Importando biblioteca para se comunicar com o Flask (backend)
-import "./style.css"; //Importando o arquivo CSS
+/* Importando biblioteca para se comunicar com o Flask (backend) */
+import axios from 'axios'
+import Modal from './extras/modal'
 
-const API_URL = "http://127.0.0.1:5000"; // Link disponibilizado pelo backend
+/* Importando o arquivo CSS */
+import './style.css'
+const API_URL = 'http://127.0.0.1:5000' // Link disponibilizado pelo backend
 
 export default {
-  data() {
+  data () {
     return {
-      buttonClick: "",
       listImage: [],
       uploadedImage: null,
       listTop: null,
       Itens: null,
-    };
+      count: -1
+    }
+  },
+
+  components: {
+    Modal
   },
 
   methods: {
-    //Reflete a imagem selecionada
+    // Reflete a imagem selecionada
 
-    onFileChange(e) {
-      let files = e.target.files || e.dataTransfer.files;
+    onFileChange (e) {
+      let files = e.target.files || e.dataTransfer.files
 
-      this.createImage(files[0]);
+      this.createImage(files[0])
 
-      document.getElementById("imageUpload").style.width = "40px";
-      document.getElementById("imageUpload").style.marginTop = "10px"; // Esses documents fazem com que haja um espaçamento logo após receber a ação do button
+      document.getElementById('imageUpload').style.width = '100px'
+      // document.getElementById('imageUpload').style.marginTop = '10px'; // Esses documents fazem com que haja um espaçamento logo após receber a ação do button
     },
 
-    //Vizualiza a imagem selecionada
+    // Vizualiza a imagem selecionada
 
-    createImage(file) {
-      let reader = new FileReader();
+    createImage (file) {
+      let reader = new FileReader()
+
       reader.onload = (e) => {
-        this.uploadedImage = e.target.result;
-      };
-      reader.readAsDataURL(file);
+        this.uploadedImage = e.target.result
+      }
+
+      reader.readAsDataURL(file)
     },
 
-    //Upa a imagem para o servidor
-    saveImage() {
-      this.listImage.push(this.uploadedImage);
+    // Upa a imagem para o servidor
+    saveImage () {
+      this.count += 1
+
+      var images = {
+        id: this.count,
+        data: this.uploadedImage
+      }
+
+      this.listImage.push(images)
     },
 
-    //
-    onUploadImage(e) {
-      const id = e.target.id;
+    onUploadImage (e) {
+      const id = e.target.id
 
-      if (id == "buttonSend") {
-        var params = new FormData();
-        params.append("image", this.uploadedImage);
-        document.getElementById("imgContent").style.width = "30%";
-        document.getElementById("main").style.width = "60%";
-        axios.post(`${API_URL}/classification`, params).then((res) => {
-          this.listTop = this.loadData(res.data.response);
-          this.Itens = this.loadListFull(res.data.response);
-        });
+      if (id === 'buttonSend') {
+        const dataset = this.listImage
+
+        for (let i = 0; i < dataset.length; i++) {
+          var params = new FormData()
+          console.log(dataset[i]['data'])
+          params.append('image', dataset[i]['data'])
+
+          setInterval(() => {
+            axios.post(`${API_URL}/classification`, params).then((res) => {
+              // this.listTop = this.loadData(res.data.response)
+              this.Itens = this.loadListFull(res.data.response, i)
+            }, 2000)
+          })
+        }
       } else {
-        this.saveImage(); // Caso a condiçõ seja falsa, a imagem será apenas salva em um array fazendo com que depois possa realizar o multiprocessamento
+        this.saveImage() // Caso a condiçõ seja falsa, a imagem será apenas salva em um array fazendo com que depois possa realizar o multiprocessamento
       }
     },
 
-    loadData(data) {
+    loadData (data) {
       // Essa função é responsável por realizar o carregamento da barra de loading disponibilizada logo após receber a imagem e enviar a ação de 'classificar'
 
-      var i = 0;
-      var ProgressBar = require("progressbar.js"); // Cria uma variavel do tipo 'var' fazendo com que receba um objeto da biblioteca progressbar.js
+      var i = 0
+      var ProgressBar = require('progressbar.js') // Cria uma variavel do tipo 'var' fazendo com que receba um objeto da biblioteca progressbar.js
 
-      const obj = JSON.parse(data); // Converte os dados recebidos em um JSON.parse
+      const obj = JSON.parse(data) // Converte os dados recebidos em um JSON.parse
 
-      const DataForm = [];
+      const DataForm = []
       for (i = 0; i < 3; i++) {
-        DataForm.push(obj[i]); // Manda as 3 especies que mais se comparam as caracteristicas retiradas da imagem passada
+        DataForm.push(obj[i]) // Manda as 3 especies que mais se comparam as caracteristicas retiradas da imagem passada
       }
 
       for (i = 0; i < 3; i++) {
-        var Nome = DataForm[i]["classe"];
-        var Percent = DataForm[i]["value"];
-        Nome = Nome.split("_");
-        Nome = Nome[0];
-        document.getElementById("list" + (i + 1)).innerHTML =
+        var Nome = DataForm[i]['classe']
+        var Percent = DataForm[i]['value']
+        Nome = Nome.split('_')
+        Nome = Nome[0]
+        document.getElementById('list' + (i + 1)).innerHTML =
           parseFloat(Percent.toFixed(2)) +
-          " - " +
+          ' - ' +
           Nome +
-          '<div id="listDiv' +
-          (i + 1) +
-          '"></div>';
+          '<div id="listDiv"' + (i + 1) + '""></div>'
       }
 
-      var bar1 = new ProgressBar.Line("#listDiv1", { easing: "easeInOut" });
-      var bar2 = new ProgressBar.Line("#listDiv2", { easing: "easeInOut" });
-      var bar3 = new ProgressBar.Line("#listDiv3", { easing: "easeInOut" });
+      var bar1 = new ProgressBar.Line('#listDiv1', { easing: 'easeInOut' })
+      var bar2 = new ProgressBar.Line('#listDiv2', { easing: 'easeInOut' })
+      var bar3 = new ProgressBar.Line('#listDiv3', { easing: 'easeInOut' })
 
-      bar1.animate(parseInt(DataForm[0]["value"]) / 100);
-      bar2.animate(parseInt(DataForm[1]["value"]) / 100);
-      bar3.animate(parseInt(DataForm[2]["value"]) / 100);
+      bar1.animate(parseInt(DataForm[0]['value']) / 100)
+      bar2.animate(parseInt(DataForm[1]['value']) / 100)
+      bar3.animate(parseInt(DataForm[2]['value']) / 100)
 
-      document.getElementById("imgResultId").style.visibility = "visible";
+      document.getElementById('imgResultId').style.visibility = 'visible'
 
-      return DataForm;
+      return DataForm
     },
 
-    loadListFull(data) {
-      var i = 0;
+    loadListFull (data, idReceive) { // Está função é responsável por carregar a lista completa da classificação.
+      var i = 0
 
-      const DataForm = [];
+      const DataForm = []
 
       for (i = 0; i < 44; i++) {
-        DataForm.push(JSON.parse(data)[i]);
+        DataForm.push(JSON.parse(data)[i])
       }
 
-      return DataForm;
+      const dataset = {
+        id: idReceive,
+        data: DataForm
+      }
+
+      return dataset
     },
 
-    loadNameClass(data) {
-      return data.split("_")[0];
+    loadNameClass (data) { // Apenas retorna o nome com um espaçamento
+      return data.split(' ')[0]
     },
 
-    loadNameClass2(data, value) {
-      data = data.split("_")[0];
+    loadNameClass2 (data, value) { // Converte o '_' em ' '
+      data = data.split('_')[0]
 
-      data = data.split(" ")[0];
+      data = data.split(' ')[0]
 
-      return data;
+      return data
     },
-  },
-};
+
+    maxValue (data) {
+      let maior = 0
+      for (let i = 0; i < data.length; i++) {
+        if (maior >= data[i]) {
+          maior = data[i]
+        }
+      }
+      console.log(data)
+      return maior
+    },
+
+    deleteImage (data) { // Terminar isso depois **************
+      const listImageTemp = this.listImage // Define um array temporário
+      console.log('Id passado:' + data.id)
+      console.log('Total de itens:' + this.listImage.length)
+      console.log('Count: ' + this.count)
+
+      listImageTemp.splice(listImageTemp.indexOf(data.id), 1)
+
+      this.listImage = listImageTemp
+
+      // for (let i = 0; i < this.listImage.length; i++) {
+      //   if (data.id - 1 !== i) {
+      //     listImageTemp.push(this.listImage[i])
+      //     console.log(i)
+      //   }
+      // }
+
+      console.log(listImageTemp)
+      console.log(this.listImage)
+
+      // listImageTemp.map((item) => {
+      //   ListaId.push(item.id)
+      // })
+
+      // this.count = this.maxValue(ListaId[1])
+      // console.log(this.count)
+    }
+  }
+}
 </script>

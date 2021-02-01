@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        modalShow: false
-      }
+export default {
+  data () {
+    return {
+      modalShow: false
     }
   }
+}
 </script>
