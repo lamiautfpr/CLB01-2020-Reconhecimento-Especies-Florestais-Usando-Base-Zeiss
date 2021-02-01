@@ -39,7 +39,7 @@ ___
 
 ## Resumo
 
-Foi desenvolvido pesquisas na area de Deep Learning para conseguirmos criar um modelo capaz de distinguir espécies florestais apartir de fotos macroscopicas, após a validação do mesmo, criamos um protótipo para testes embarcando a rede neural.
+Arquitetura de Visão Computacional com Deep Learning para classificação de diferentes espécies florestais da Amazônia a partir de fotos macroscópicas da madeira cortada, sendo essa uma ferramenta para identificação rápida e precisa em campo quando identificados cortes e desmatamentos ilegais no bioma, com foco em auxiliar os peritos da polícia federal e florestal a reduzir os crimes contra o bioma Amazônico. 
 
 ## Objetivos
 
