@@ -1,6 +1,29 @@
 #buttons{
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 15px;
+  margin: 20px 10px;
 }
+
+
+#colorValue:hover{
+  transition: 1ms ease-in-out all;
+  transform: scaleX(1.2);
+  color: gray;
+}
+
+#colorValue{
+  color:blue;
+  margin-right: 4%;
+}
+
+#spanColor, #itemContainer{
+  flex: 1 1 auto;
+  justify-content: space-between;
+}
+
+#itemContainer{
+  border: 0;
+}
+
+#modal-title{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
