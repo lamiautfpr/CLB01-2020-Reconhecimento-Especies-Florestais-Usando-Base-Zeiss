@@ -12,7 +12,7 @@
     height: 10px;
     position: relative;
     bottom: 0;
-    top: 75%;
+    top: 60%;
     left: 0;
 }
 
@@ -98,7 +98,7 @@ h2 { /*Configurando o estilo da fonte do title*/
     }
 
     #footer{
-        top: 90%;
+        top: 20%;
     }
 
     body{

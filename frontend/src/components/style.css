@@ -1,7 +1,8 @@
 .main {
   display: flex;
-  width: 80%;
+  width: 90%;
   height: 400px;
+  min-width: 460px;
 }
 
 #mainDiv{
@@ -36,8 +37,10 @@ li img{
 }
 
 li{
-  margin-top: 10px;
   display: flex;
+}
+
+li img{
   border-left: 5px solid rgb(133, 204, 245);
 }
 
@@ -64,6 +67,11 @@ h3{
   margin-right: auto;
   margin-left: auto;
   border-radius: 20px;
+}
+
+#listImage li{
+  width: 80%;
+  margin: auto;
 }
 
 .attachFileSpan {
@@ -99,21 +107,15 @@ input[type="file"] {
 }
 
 #ButtonClassfication{
-  width: 80%;
+  width: 90%;
   height: 200px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
 
-#colorValue:hover{
-  transition: 1ms;
-  color: gray;
-}
-
-#colorValue{
-  color:blue;
-  float: right;
+#ButtonClassfication a{
+  margin-top: 10px;
 }
 
 .imgResult {
@@ -136,29 +138,41 @@ input[type="file"] {
 #mainSection{
   flex: 1 1 auto;
   width: 90%;
-  flex-direction: column;
+  flex-direction: row;
   margin: auto;
-}
-
-#spanColor, #nameClass{
-  flex: 1 1 auto;
 }
 
 .imgResultId{
   width: 50%;
 }
 
+/* Configurando o botão da msg */
+
+.alert-bootstrap{
+  margin: 20px auto 30px;
+  width: 400px;
+}
+
+#buttonConsult{
+  width: 40%;
+  margin: auto;
+}
+
 @media screen and (min-width: 1024px) {
 
+  .alert-bootstrap{
+    width: 500px;
+  }
+
   .styleMain{
-    flex-direction: column;
+    flex-direction: row
   }
 
   .main{
     flex: 1 1 auto;
-    width: 50%;
-    height: 300px;
-    margin: 5% auto;
+    width: 60%;
+    height: 400px;
+    margin: 2% auto;
   }
 
   #mainDiv{
@@ -171,13 +185,17 @@ input[type="file"] {
     flex-direction: column;
   }
 
-  #buttonSave, #buttonSend{
-    width: 40%;
+  #buttonSave, #buttonConsult, #buttonSend{
+    width: 50%;
     height: 50px;
   }
 
   .imgResult{
     width: 50rem;
+  }
+
+  .receive-image{
+    margin-top: 50px;
   }
 
   #divUpload{
@@ -194,17 +212,22 @@ input[type="file"] {
   }
 
   #margin{
-
     margin: auto;
-    border: 1px solid black;
     display: flex;
-    width: 500px;
-    flex-direction: row;
+    width: 100px;
   }
 
-  #mainSection{
-    flex-direction: row;
-    border: 1px solid black;
+  #listImage{
+    margin: auto;
   }
 
+  #listImage li img{
+    padding: 10px;
+  }
+}
+
+@media (max-width: 475px){
+  #buttonSend, #buttonSave, #buttonConsult {
+    font-size: 10px;
+  }
 }
