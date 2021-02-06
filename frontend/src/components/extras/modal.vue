@@ -1,63 +1,27 @@
-<template>
-  <div id="buttons">
-    <b-button variant="success">{{title2}}</b-button>
-<!--
-  <div class="imgResult" id="imgResultId">
-        <b-card-group deck id="divResultModel" disabled="true">
-          <b-card
-            id="dropdown-offset"
-            offset="25"
-            text="Offset Dropdown"
-            class="m-2"
-          >
-            <button
-              type="button"
-              id="list1"
-              disabled="true"
-              class="list-group-item list-group-item-action butList"
-            ></button>
-            <button
-              type="button"
-              id="list2"
-              disabled="true"
-              class="list-group-item list-group-item-action butList"
-            ></button>
-            <button
-              type="button"
-              id="list3"
-              disabled="true"
-              class="list-group-item list-group-item-action butList"
-            ></button>
-          </b-card>
-        </b-card-group>
+  <template>
+  <div>
+    <!-- <b-button  @click="dataHidden()">{{title2}}</b-button> -->
+    <b-button v-b-modal.modalPopover  id="buttons" variant="success" @click="dataHidden()">{{title2}}</b-button>
 
-        <b-button variant="dark" v-b-modal.modal-1
-          >Mais detalhes
-          <b-modal id="modal-1" title="Detalhes">
-            <div>
-              <b-card
-                id="dropdown-offset card-detalhe" offset="25" text="Offset Dropdown" class="m-2">
+    <b-modal id="modalPopover" v-if="itemModal.showFrame">
+      <b-card title="Card Title" no-body>
+        <b-card-header header-tag="nav">
+          <b-nav card-header tabs>
+            <b-nav-item id="listFull" active>Imagem {{itemModal.id}}</b-nav-item>
+          </b-nav>
+        </b-card-header>
 
-                <button type="button" v-for="item in Itens" v-bind="item"
-                  disabled="true" class="list-group-item list-group-item-action butList">
-
-                  <div class="detalhes-1">
-                    <div id="nameClass">
-                      {{ loadNameClass(item.classe) }}
-                      <span id="colorValue">
-                        {{ item.value
-                        }}<span style="color: black">%</span></span
-                      >
-                    </div>
-                  </div>
-                </button>
-              </b-card>
+        <b-card-body class="text-center">
+          <b-card-text>
+            <div class="d-block text-center">
+              <ul id="container">
+                <li id="itemContainer" v-for="item in itemModal.data" :key="item">{{loadNameClass2(item.classe)}} <span id="colorValue">{{item.value}}</span></li>
+              </ul>
             </div>
-          </b-modal>
-        </b-button>
-      </div>
--->
-
+          </b-card-text>
+        </b-card-body>
+      </b-card>
+    </b-modal>
   </div>
 </template>
 
@@ -67,10 +31,46 @@
 import './styles_extras.css'
 
 export default {
+
   props: {
-    data: [],
+    datasets: [],
     title: '',
+    idItens: 0,
     title2: ''
+  },
+
+  data () {
+    return {
+      itemModal: []
+    }
+  },
+
+  methods: {
+    dataHidden () {
+      var id = this.idItens
+
+      let data = []
+      this.datasets.Itens.map(item => {
+        if (item.id === id) {
+          item.showFrame = true
+          data.push(item)
+        } else if (item.id !== id) {
+          item.showFrame = false
+        }
+      })
+      this.itemModal = data[0]
+    },
+
+    loadNameClass (data) { // Apenas retorna o nome com um espaçamento
+      console.log(data)
+      return data.split(' ')[0]
+    },
+
+    loadNameClass2 (data) { // Converte o '_' em ' '
+      data = data.split('_')[0]
+
+      return data
+    }
   }
 }
 </script>
