@@ -1,6 +1,13 @@
 <template>
   <div>
     <div id="mainDiv">
+      <b-alert class="alert-bootstrap"
+        :show="dismissCountDown"
+        dismissible
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged">
+        {{msgAlert}}
+      </b-alert>
       <div class="styleMain main">  <!-- Essa div é responsável por receber a imagem e exibi-lá -->
         <div class="imgContent" id="imgContent">
 
@@ -13,9 +20,9 @@
               <span title="Enviar imagem(s)" class="attachFileSpan"
                 onclick="document.getElementById('image').click()">
 
-                <b-img id="imageUpload" v-bind="mainProps" blank-color="rgba(128, 255, 255, 0.5)"
+                <b-img id="imageUpload" :key="mainProps" blank-color="rgba(128, 255, 255, 0.5)"
                   src="https://image.flaticon.com/icons/png/512/12/12313.png" width="100" alt="RGBa color image">
-                  </b-img>
+                </b-img>
               </span>
               <br/>
 
@@ -26,20 +33,28 @@
 
           <div id="ButtonClassfication">
             <!--Botões do bootstrap-->
-            <button type="button" @click="onUploadImage" id="buttonSend" class="btn btn-dark">
-              Classification
+            <button type="button" @click="onUploadImage" id="buttonSend" class="btn btn-dark font-button">
+              Classificar
             </button>
-
             <br />
-            <button type="button" @click="onUploadImage" id="buttonSave" class="btn btn-dark">
-              Save Image
+            <button type="button" @click="onUploadImage" id="buttonSave" class="btn btn-dark font-button">
+              Salvar Imagem
             </button>
+            <br />
+            <a href="/">
+              <button type="button" id="buttonConsult" class="btn btn-dark font-button">
+                Nova consulta
+              </button></a>
           </div>
         </div>
         <div id="margin">
           <ul id="listImage">
-            <h4>Images carregadas</h4>
-            <li v-for="item in listImage" :key="item.id">{{item.id}}<img :src="item.data" width="100px"/><Modal :data="item" title2="Detalhes"/><b-button variant="danger" style="width: 40%; height: 37px; margin-top: 14px; margin-right: 80px;" @click="deleteImage(item)">Apagar</b-button></li>
+            <h4 id="title-image" style="visibility: hidden;">Images carregadas</h4>
+            <li v-for="item in listImage" :key="item.id">
+              <img :src="item.data" style="width: 100px; margin-top: 10px;"/>
+              <Modal :datasets="{Itens}" :idItens="item.id" title2="Detalhes"/>
+              <b-button variant="danger" style="width: 50px; height: 37px; margin: 20px 14px;" @click="deleteImage(item)">X</b-button>
+            </li>
           </ul>
         </div>
       </div>
@@ -62,8 +77,12 @@ export default {
       listImage: [],
       uploadedImage: null,
       listTop: null,
-      Itens: null,
-      count: -1
+      Itens: [],
+      itemModal: [],
+      count: -1,
+      dismissSecs: 5,
+      dismissCountDown: 0,
+      msgAlert: ''
     }
   },
 
@@ -72,6 +91,16 @@ export default {
   },
 
   methods: {
+
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+
+    showAlert (msg) {
+      this.msgAlert = msg
+      this.dismissCountDown = this.dismissSecs
+    },
+
     // Reflete a imagem selecionada
 
     onFileChange (e) {
@@ -80,7 +109,6 @@ export default {
       this.createImage(files[0])
 
       document.getElementById('imageUpload').style.width = '100px'
-      // document.getElementById('imageUpload').style.marginTop = '10px'; // Esses documents fazem com que haja um espaçamento logo após receber a ação do button
     },
 
     // Vizualiza a imagem selecionada
@@ -97,17 +125,22 @@ export default {
 
     // Upa a imagem para o servidor
     saveImage () {
-      this.count += 1
+      if (this.listImage.length <= 5) {
+        this.count += 1
+        document.getElementById('title-image').style.visibility = 'visible' // Definindo que o h4 ficará visivel a partir de agora, já que a imagem foi carregada e será exibida na tela
 
-      var images = {
-        id: this.count,
-        data: this.uploadedImage
+        var images = {
+          id: this.count,
+          data: this.uploadedImage
+        }
+
+        this.listImage.push(images)
+      } else {
+        this.showAlert('Não é possível inserir mais do que 6 imagens')
       }
-
-      this.listImage.push(images)
     },
 
-    onUploadImage (e) {
+    async onUploadImage (e) {
       const id = e.target.id
 
       if (id === 'buttonSend') {
@@ -117,12 +150,9 @@ export default {
           var params = new FormData()
           console.log(dataset[i]['data'])
           params.append('image', dataset[i]['data'])
-
-          setInterval(() => {
-            axios.post(`${API_URL}/classification`, params).then((res) => {
-              // this.listTop = this.loadData(res.data.response)
-              this.Itens = this.loadListFull(res.data.response, i)
-            }, 2000)
+          await axios.post(`${API_URL}/classification`, params).then((res) => {
+            // this.listTop = this.loadData(res.data.response)
+            this.Itens.push(this.loadListFull(res.data.response, i))
           })
         }
       } else {
@@ -179,61 +209,27 @@ export default {
 
       const dataset = {
         id: idReceive,
-        data: DataForm
+        data: DataForm,
+        showFrame: 0
       }
 
       return dataset
     },
 
-    loadNameClass (data) { // Apenas retorna o nome com um espaçamento
-      return data.split(' ')[0]
-    },
-
-    loadNameClass2 (data, value) { // Converte o '_' em ' '
-      data = data.split('_')[0]
-
-      data = data.split(' ')[0]
-
-      return data
-    },
-
-    maxValue (data) {
-      let maior = 0
-      for (let i = 0; i < data.length; i++) {
-        if (maior >= data[i]) {
-          maior = data[i]
-        }
-      }
-      console.log(data)
-      return maior
-    },
-
     deleteImage (data) { // Terminar isso depois **************
-      const listImageTemp = this.listImage // Define um array temporário
-      console.log('Id passado:' + data.id)
-      console.log('Total de itens:' + this.listImage.length)
-      console.log('Count: ' + this.count)
+      let itemPassed = []
 
-      listImageTemp.splice(listImageTemp.indexOf(data.id), 1)
+      this.listImage.map((item) => { // Função 'map' é responsável por pegar cada item e realizar a verificação do id, ou seja, será inserido todos os itens que não tiverem o id correspondente, sendo que cada id é único para cada imagem.
+        if (item.id !== data.id) {
+          itemPassed.push(item)
+        }
+      })
 
-      this.listImage = listImageTemp
+      this.listImage = itemPassed
+    },
 
-      // for (let i = 0; i < this.listImage.length; i++) {
-      //   if (data.id - 1 !== i) {
-      //     listImageTemp.push(this.listImage[i])
-      //     console.log(i)
-      //   }
-      // }
-
-      console.log(listImageTemp)
-      console.log(this.listImage)
-
-      // listImageTemp.map((item) => {
-      //   ListaId.push(item.id)
-      // })
-
-      // this.count = this.maxValue(ListaId[1])
-      // console.log(this.count)
+    mostrarData () {
+      console.log(this.Itens)
     }
   }
 }
