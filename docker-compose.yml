@@ -1,0 +1,39 @@
+version: '3'
+
+services: 
+
+  nginx:
+    image: nginx:1.17.6-alpine
+    container_name: nginx
+    ports:
+      - "8000:80"
+    networks: 
+      - flasknet
+
+  api:
+    build:
+      context: backend/
+      dockerfile: Dockerfile
+    image: api
+    container_name: api
+    restart: unless-stopped
+    networks: 
+      - flasknet
+
+  react:
+    build: 
+      context: frontend
+      dockerfile: Dockerfile
+    environment: 
+      - REACT_APP_API_URL= http://localhost:8000
+    image: react
+    container_name: react
+    restart: unless-stopped
+    depends_on: 
+      - api
+    networks: 
+      - flasknet
+
+networks: 
+  flasknet:
+    driver: bridge
