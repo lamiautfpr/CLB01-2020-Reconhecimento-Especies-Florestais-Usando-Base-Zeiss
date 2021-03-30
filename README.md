@@ -143,8 +143,10 @@ wrapt==1.12.1
 Será preciso que realize a instalação das dependências do frontend, para isso siga as instruções abaixo.
 
 ```bash
-# Install dependencies npm 
+# Install dependencies 'npm' 
 $ npm install
+
+# Install dependencies 'yarn'
 ```
 
 Caso haja algum erro, execute os seguintes comandos.
@@ -153,16 +155,18 @@ Caso haja algum erro, execute os seguintes comandos.
 # Remove folder 'node_modules'
 $ rm -rf node_modules
 
-# Reinstall dependencies
+# Reinstall dependencies to 'npm'
 $ npm install
+
+# Reinstall dependencies to 'yarn'
 ```
 
 Dependências do frontend
 
 ```bash
-vue-cli
+react
+bootstrap-react
 axios
-bootstrap-vue-cli
 ```
 
 Com todo o projeto já configurado, execute os comandos abaixo no terminal para rodar o projeto.
@@ -186,15 +190,4 @@ O protótipo utiliza as seguintes bibliotecas e tecnologias:
 * [Keras-Preprocessing](https://keras.io/guides/preprocessing_layers/) - Executa as camadas de pré-processamento de cada entrada 
 * [Requests](https://requests.readthedocs.io/en/master/) - Utilizada para fazer requisições HTTP pelo Python.
 * [Numpy](https://numpy.org/) - Manipulação dos dados.
-* [Vue](https://keras.io/guides/preprocessing_layers/) - Framework utilizado para criar cada componente renderizado pela interface de interação com o usuário (Frontend).
-
-## Citação
-
-Se você utliza e quer citar o projeto em sua pesquisa, por favor utilize o formato de citação abaixo:
-    
-    @inproceedings{LAMIA_ic02,
-      title={Protótipo de Reconhecimento de espécies},
-      author={Naves, T. F.; BEUREN, A. T.; BRILHADOR, A.},
-      journal={IEEE Conference on Big Data},
-      year={2020}
-    }
+* [React](https://pt-br.reactjs.org/) - Framework utilizado para criar cada componente renderizado pela interface de interação com o usuário (Frontend).
