@@ -3,7 +3,7 @@
   <a href="https://www.lamia.sh.utfpr.edu.br/">
     <img src="https://user-images.githubusercontent.com/26206052/86039037-3dfa0b80-ba18-11ea-9ab3-7e0696b505af.png" alt="LAMIA - Laboratório de                  Aprendizagem de Máquina e Imagens Aplicados à Indústria" width="400"></a>
 <br> <br>
-<h4 align="center"><a href="https://github.com/lamiautfpr/CLB01-2020-Reconhecimento-Especies-Florestais-Usando-Base-Zeiss/blob/masterProto/extra/GIfPrototipo.webm" target="_blank">Protótipo de Reconhecimento de Espécies Florestais </a></h4>
+<h4 align="center"><a href="https://bit.ly/paineldadoscovid19" target="_blank">Protótipo de Reconhecimento de Espécies Florestais </a></h4>
 </h1>
 
 <p align="center">
@@ -31,7 +31,7 @@ Status do Projeto: Em desenvolvimento :warning:
 
 <p align="center">
   <a href="https://www.loom.com/share/078eb1ade510400ea0826053973d385e">
-    <img src="https://raw.githubusercontent.com/lamiautfpr/CLB01-2020-Reconhecimento-Especies-Florestais-Usando-Base-Zeiss/master/frontend/src/assets/image_frontend.png" width="900">
+    <img src="https://github.com/lamiautfpr/CLB01-2020-Reconhecimento-Especies-Florestais-Usando-Base-Zeiss/blob/masterProto/extra/GIfPrototipo.webm" width="900">
   </a>
 </p>
 
