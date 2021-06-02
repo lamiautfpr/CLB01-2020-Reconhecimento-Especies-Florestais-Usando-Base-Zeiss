@@ -1,0 +1,6 @@
+
+backend/assets/pesos-5.tf/
+backend/assets/dict.txt
+frontend/node_modules
+*/__pycache__/
+frontend/node_modules/
