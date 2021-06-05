@@ -29,6 +29,7 @@ Ana Capeletti<a href="https://github.com/ANACAPELETTI" target="_blank">  (Ana, C
 Status do Projeto: Em desenvolvimento :warning:
 </p>
 
+
 <p align="center">
   <a href="https://www.loom.com/share/078eb1ade510400ea0826053973d385e">
     <img src="https://github.com/lamiautfpr/CLB01-2020-Reconhecimento-Especies-Florestais-Usando-Base-Zeiss/blob/a870522aaca475fbe1cffcac64bc343f32df783a/extra/GIfPrototipo-min.gif" width="900">
