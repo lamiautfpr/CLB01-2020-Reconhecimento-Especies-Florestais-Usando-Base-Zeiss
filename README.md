@@ -9,7 +9,7 @@
 <p align="center">
 <b>Equipe:</b>  
 <br>
-Thiago Naves <a href="https://github.com/tfnaves" target="_blank">  (Naves, T. F.)</a> - Coordenador  <br>
+Thiago Naves <a href="https://github.com/tfnaves" target="_blank">  (Naves, T. F.)</a> - Coordenador   <br>
 Luis Fernando da Rosa<a href="https://github.com/LuisFernandoRosa" target="_blank">  (Luis, F. R.)</a> - Membro Líder <br>
 João Pacheco <a href="https://github.com/joaopacheco7" target="_blank">  (João, P.)</a> - Membro <br>
 Gustavo Silva Quieregato<a href="https://github.com/L3onT3chh" target="_blank">  (Gustavo, S. Q.)</a> - Novato  <br>
