@@ -4,3 +4,5 @@ backend/assets/dict.txt
 frontend/node_modules
 */__pycache__/
 frontend/node_modules/
+node_modules
+node_modules/*
